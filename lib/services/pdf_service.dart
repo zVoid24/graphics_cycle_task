@@ -28,12 +28,6 @@ class PdfService {
       output = await getExternalStorageDirectory();
     }
     output ??= await getApplicationDocumentsDirectory();
-
-    // Create Documents/DocScan subdirectory if possible to be more organized?
-    // getExternalStorageDirectory points to Android/data/package.../files
-    // We can't easily write to /Documents without permissions logic.
-    // Stick to app-specific external for now as it doesn't need runtime permission for own folder on 19+.
-
     final file = File('${output.path}/$fileName');
     await file.writeAsBytes(await pdf.save());
     return file.path;
